@@ -1,0 +1,11 @@
+<launch>
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find jaka_sim_env)/model"/>
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="world_name" value="$(find jaka_sim_env)/model/worlds/jaka_desk.world"/>
+  </include>
+
+</launch>

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<robot name="test_model" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find realsense_ros_gazebo)/xacro/tracker.xacro"/>
+  <xacro:include filename="$(find realsense_ros_gazebo)/xacro/depthcam.xacro"/>
+
+  <link name="base_footprint"/>
+
+  <joint name="footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <origin rpy="0 0 0 " xyz="0 0 0.005"/>
+      <geometry>
+          <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+    <child link="cam_light_link"/>
+    <collision>
+      <origin rpy="0 0 0 " xyz="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+    <gravity>0</gravity>
+  </link>
+
+  
+  <!-- TEST -->
+
+  <xacro:realsense_d435 sensor_name="d435" parent_link="base_link" rate="10">
+    <origin rpy="0 0 0 " xyz="0 0 0.01"/>
+  </xacro:realsense_d435>
+
+  <!--link name="cam_light_link">
+    <visual>
+      <origin rpy="0 0 0 " xyz="0 0 0.05"/>
+      <geometry>
+          <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0 " xyz="0 0 0.05"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+    <gravity>0</gravity>
+    <light name='light1' type='spot'>
+      <pose>1 0 0 0 0 0</pose>
+      <diffuse>0 1 0 1</diffuse>
+      <attenuation>
+        <range>10</range>
+        <constant>0.2</constant>
+        <linear>0.01</linear>
+      </attenuation>
+      <direction>1 0 0</direction>
+    </light>
+  </link>
+
+  <joint name="cam_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="cam_light_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+
+  <plugin name='light_control' filename='libFlashLightPlugin.so'>
+    <enable>true</enable>
+    <light>
+      <id>cam_light_link/light1</id>
+      <duration>1</duration>
+      <interval>0</interval>
+      <color>1 1 1</color>
+    </light>
+  </plugin-->
+
+  <!-- <xacro:realsense_T265 sensor_name="camera" parent_link="base_link" rate="30.0">
+    <origin rpy="0 0 0" xyz="0 0 0.5"/>
+  </xacro:realsense_T265> -->
+
+  <!-- <xacro:realsense_R200 sensor_name="camera" parent_link="base_link" rate="30.0">
+    <origin rpy="0 0 0" xyz="0 0 0.5"/>
+  </xacro:realsense_R200> -->
+
+
+</robot>
