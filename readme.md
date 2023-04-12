@@ -1,5 +1,7 @@
 # 安装依赖
+`sudo apt install ros-noetic-moveit-ros-visualization`
 
+`sudo apt install ros-noetic-joint-trajectory-controller`
 # 运行
 run simulation environment 
 
