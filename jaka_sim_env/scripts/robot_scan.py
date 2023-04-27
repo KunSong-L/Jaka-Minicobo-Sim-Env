@@ -15,6 +15,7 @@ import sys
 import os
 import open3d as o3d
 from sensor_msgs.msg import PointCloud2, PointField
+import tf
 
 class robot_scan:
     def __init__(self):
@@ -32,6 +33,16 @@ class robot_scan:
         self.cy = 239.5
         self.factor = 1000
         self.depth_pc = rospy.Publisher('/depth_pointcloud', PointCloud2, queue_size=1)
+        #get tf
+        self.tf_listener = tf.TransformListener()
+        tmptimenow = rospy.Time.now()
+        self.tf_listener.waitForTransform("/d435_depth_frame", "/Link_0", tmptimenow, rospy.Duration(0.5))
+        try:
+            self.camera_transform, self.camera_rotation = self.tf_listener.lookupTransform("/d435_depth_frame", "/Link_0", tmptimenow, rospy.Duration(0.1))
+            self.tf_transform_ready = 1
+        except:
+            print("----------Failed to Get Camera Transform-----------")
+
 
     def init_camera_info(self,data):
         if not self.camera_info_init_done:
@@ -39,11 +50,13 @@ class robot_scan:
             self.fy = data.K[4]
             self.cx = data.K[2]
             self.cy = data.K[5]
+            self.camera_info_init_done=1
 
 
     def imageDepthCallback(self, data):
         # Convert ROS Image message to numpy array
-
+        if not self.camera_info_init_done:
+            return None
         bridge = CvBridge()
         depth_image = bridge.imgmsg_to_cv2(data)
         # Convert depth image to point cloud
