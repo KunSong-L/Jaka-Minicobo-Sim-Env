@@ -186,7 +186,7 @@ class MoveGroupPythonInterfaceTutorial(object):
         ## We use the constant `tau = 2*pi <https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals>`_ for convenience:
         # We get the joint values from the group and change some of the values:
         joint_goal = move_group.get_current_joint_values()
-        joint_goal[5] += pi/12
+        joint_goal[5] += pi/15
 
         # The go command can be called with joint values, poses, or without any
         # parameters if you have already set the pose or joint target for the group
@@ -215,12 +215,12 @@ class MoveGroupPythonInterfaceTutorial(object):
         ## end-effector:
         pose_goal = geometry_msgs.msg.Pose()
         pose_goal.orientation.x = -2**0.5/2
-        pose_goal.orientation.y = 0
+        pose_goal.orientation.y = -0.01
         pose_goal.orientation.z = 2**0.5/2
         pose_goal.orientation.w = 0
-        pose_goal.position.x = -0.3
+        pose_goal.position.x = -0.4
         pose_goal.position.y = 0.0
-        pose_goal.position.z = 0.58
+        pose_goal.position.z = 0.4
 
         move_group.set_pose_target(pose_goal)
 
@@ -373,7 +373,7 @@ def main():
         input(
             "============ Press `Enter` to begin the tutorial by setting up the moveit_commander ..."
         )
-        robot_name = "jaka_zu3"
+        robot_name = "jaka_minicobo"
         tutorial = MoveGroupPythonInterfaceTutorial(robot_name)
         current_pose = tutorial.move_group.get_current_pose().pose
         print(current_pose)
@@ -385,7 +385,9 @@ def main():
         )
         tutorial.go_to_joint_state()
         print("------------Change Pose--------------")
-        tutorial.add__pose(dy=0.1,dz=-0.1)
+        tutorial.add__pose(dy=0.2,dz=0)
+        print("------------Change Pose--------------")
+        tutorial.add__pose(dy=0,dz=-0.2)
  
         
         # input("============ Press `Enter` to plan and display a Cartesian path ...")
