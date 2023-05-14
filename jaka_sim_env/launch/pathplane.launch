@@ -1,0 +1,7 @@
+<launch>
+
+  <node name="robot_scan" pkg="jaka_sim_env" type="robot_scan.py" output="screen"/>
+  <node name="pathplan_sim" pkg="jaka_sim_env" type="pathplan_sim.py" output="screen"/>
+  <node name="robmov" pkg="jaka_sim_env" type="robmov.py" output="screen"/>
+  
+</launch>
