@@ -11,10 +11,8 @@ run simulation environment
 
 `roslaunch jaka_minicobo_moveit_config demo_mini_cam.launch`
 
-run robot control
+run path plan part
 
-`rosrun jaka_sim_env move_jaka.py`
+`roslaunch jaka_sim_env pathplan.launch`
 
-## 总体代码
-可以运行robot_scan.py从而实现从读取点云数据到轨迹规划部分（仿真环境）
 
