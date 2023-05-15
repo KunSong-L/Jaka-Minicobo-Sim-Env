@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="End Model">
+    <static>true</static>
+    <link name="end_link">
+    <collision name="your_collision_name">
+      <geometry>
+        <mesh>
+          <uri>model://end_model/meshes/end.dae</uri>
+        </mesh>
+      </geometry>
+    </collision>
+      <visual name="head_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://end_model/meshes/end.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

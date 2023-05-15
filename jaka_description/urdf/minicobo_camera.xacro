@@ -169,6 +169,29 @@
     </collision>
   </link>
 
+<link name="end_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0" />
+      <inertia ixx="0" ixy="0"  ixz="0"  iyy="0"  iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0"  rpy="0 0 0" />
+      <geometry>
+        <mesh  filename="package://jaka_sim_env/model/end_model/meshes/end.dae" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://jaka_sim_env/model/end_model/meshes/end.dae" />
+      </geometry>
+    </collision>
+  </link>
+
 <link name="dummy_tcp"/>
 
 
@@ -227,12 +250,18 @@
     <limit lower="-6.28" upper="6.28" effort="100" velocity="1.57" />
   </joint>
 
-<joint name="dummy_tcp_joint" type="fixed">
+  <joint name="dummy_tcp_joint" type="fixed">
         <origin xyz="0 0 0" rpy="0 0 0" />
         <parent link="Link_6" />
         <child link="dummy_tcp" />
     </joint>
-	
+
+  <joint name="end_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="Link_6" />
+        <child link="end_link" />
+    </joint>
+
 	 <!-- Gazebo -->
     <gazebo reference="dummy">
 		<material>Gazebo/White</material>
